@@ -26,17 +26,14 @@ public class CallbackExample {
     };
 
     public void doWork(final String x, final String y) {
-        Runnable task = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    int intX = Integer.parseInt(x);
-                    int intY = Integer.parseInt(y);
-                    int result = intX + intY;
-                    callback.completed(result, null);
-                } catch (NumberFormatException e) {
-                    callback.failed(e, null);
-                }
+        Runnable task = () -> {
+            try {
+                int intX = Integer.parseInt(x);
+                int intY = Integer.parseInt(y);
+                int result = intX + intY;
+                callback.completed(result, null);
+            } catch (NumberFormatException e) {
+                callback.failed(e, null);
             }
         };
 
